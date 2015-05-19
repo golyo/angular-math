@@ -10,7 +10,6 @@ angular.module('mathApp')
 			link: function($scope, element, attrs, modelCtrl) {
 				var onModelChanged = function(value) {
 					$scope.actExcercise = value;
-					console.log(value);
 					if (value) {
 						TemplateService.getTemplate(value.template).then(function (response) {
 							element.html(response.data);

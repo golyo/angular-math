@@ -16,19 +16,24 @@
 	<link rel="stylesheet" href="styles/animate.css">
 </head>
 <body ng-app="mathApp">
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
+       <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                    <span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-			  <a class="navbar-brand" href="#/home"><span translate="menu.home">Home</span></a>
-			</div>
-			<div class="collapse navbar-collapse" id="navbar-collapse" active-menu>
-				<ul class="nav navbar-nav nav-pills navbar-right">
+                </button>
+                <a class="navbar-brand" href="#/home"><span translate="menu.home">Home</span></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'" ng-click="navCollapsed=true">
+                <ul class="nav navbar-nav">
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
 					<li>
 						<a href="#/excercises">
 							<span class="glyphicon glyphicon-home"></span>
@@ -41,10 +46,11 @@
 							<span translate="menu.settings">Settings</span>
 						</a>
 					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
 	<img src="styles/addition.jpg" style="position:fixed; top: 40px; z-index: -1;" ></img>
 	<div id="outer">
 		<div class="container">

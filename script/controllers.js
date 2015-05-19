@@ -110,12 +110,6 @@ mathApp.controller('MainController', function ($scope, $interval, $compile, $loc
 	$scope.focus = function(idx) {
 		$scope.eq = $scope.equations[idx];
 	};
-	$scope.settingsAccordion = function($event) {
-		console.log($event);
-		return false;
-	};
-	console.log($state.current);
-	console.log($location.path());
 	loadSettings();
 	$scope.initialize();
 	if ("/excercises/all" == $location.path() || "/excercises/do" == $location.path() || "/excercises/result" == $location.path()) {
