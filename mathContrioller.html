@@ -1,0 +1,171 @@
+<html ng-app="practiceApp">
+
+<head>
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+	<title>Egyenletek</title>
+	<style>
+		input.form-control {
+			width:60px;
+			display: inline-block;
+			text-align: center;
+		}
+		
+		.m10 {
+			margin:10px;
+		}
+		
+		.sign {
+			width: 20px;
+			text-align: center;
+			display: inline-block;
+		}
+		
+		button {
+			margin-right: 20px;
+		}
+		
+.sample-show-hide {
+  -webkit-transition:all linear 5s;
+  transition:all linear 5s;
+}
+
+.sample-show-hide.ng-hide {
+  opacity:0;
+}
+
+		</style>
+</head>
+
+<body ng-controller="OperationsCtrl" class="container">
+	<div class="page-header"><h3 translate="global.title"></h3></div>
+	<div class="well form-horizontal" ng-show="!running">
+	  <div class="form-group">
+		<label class="control-label col-sm-3" for="additionNo" translate="config.additionNo">Addition no:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.addition.no" id="additionNo">
+		</div>
+		<label class="control-label col-sm-3" for="substractionNo" translate="config.substractionNo">Substraction no:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.substraction.no" id="substractionNo">
+		</div>
+	  </div>
+	  <div class="form-group">
+		<label class="control-label col-sm-3" for="additionMin" translate="config.additionMin">Addition min:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.addition.min" id="additionMin">
+		</div>
+		<label class="control-label col-sm-3" for="additionMax" translate="config.additionMax">Addition max:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.addition.max" id="additionMax">
+		</div>
+	  </div>
+	  <hr/>
+	  <div class="form-group">
+		<label class="control-label col-sm-3" for="multiplyNo" translate="config.multiplyNo">Multiply no:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.multiply.no" id="multiplyNo">
+		</div>
+		<label class="control-label col-sm-3" for="divisionNo" translate="config.divisionNo">Division no:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.division.no" id="divisionNo">
+		</div>
+	  </div>
+	  <div class="form-group">
+		<label class="control-label col-sm-3" for="multiplyMin" translate="config.multiplyMin">Multiply min:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.multiply.min" id="multiplyMin">
+		</div>
+		<label class="control-label col-sm-3" for="multiplyMax" translate="config.multiplyMax">Multiply max:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.multiply.max" id="multiplyMax">
+		</div>
+	  </div>
+	  <hr/>
+	  <div class="form-group">
+		<label class="control-label col-sm-3" for="clockNo" translate="config.clockNo">Clock no:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.clock.no" id="clockNo">
+		</div>
+	  </div>
+	  <hr/>
+	  <div class="form-group">
+		<label class="control-label col-sm-3" for="timeInSec" translate="config.timeInSec">Time in sec:</label>
+		<div class="col-sm-3">
+		  <input numbers-only class="form-control" ng-model="settings.timeInSec" id="timeInSec">
+		</div>
+	  </div>
+		<div class="form-group">
+			<div class="col-sm-offset-3 col-sm-3">
+				<button ng-click="reset()" class="btn btn-primary" translate="button.start">Start</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="sample-show-hide" ng-show="running" >
+		<form class="well form-horizontal">
+			<div class="form-group" ng-show="second != undefined"> 
+				<div><span translate="global.timeCounter"></span>:&nbsp;{{second}}</div>
+			</div>
+			<div id="selectedEq">
+				<excercise template-url="{{eq.template}}" ng-model="eq"></excercise>			
+			</div>
+			<div class="form-group">
+				<input type="button" class="btn btn-primary" ng-click="prev()" ng-disabled="eq.itemIndex==0" value="{{'button.prev' | translate}}"></input>
+				<input type="submit" class="btn btn-primary" ng-click="next()" ng-disabled="eq.itemIndex+1==equations.length" value="{{'button.next' | translate}}"></input>
+				<input type="button" class="btn btn-primary" ng-click="finish()" ng-show="eq.itemIndex+1==equations.length" value="{{'button.finish' | translate}}"></input>	
+			</div>
+		</form>	
+			
+		<div class="well form-horizontal">
+			<div ng-repeat="eq in equations">
+				<excercise template-url="equation.html" ng-model="eq"></excercise>
+			</div>
+
+			<div class="form-group">
+				<input type="button" ng-click="finish()" class="btn btn-primary" value="{{'button.finish' | translate}}"></input>
+			</div>
+		</div>
+	</div>	
+	
+	<div class="modal fade" id="resultModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" translate="result.title">Result</h4>
+		  </div>
+		  <div class="modal-body form-horizontal">
+			<div class="alert alert-success form-group">
+				<label><i class="glyphicon glyphicon-ok"></i>&nbsp;<span translate="result.succesNo">Good answers no</span>:&nbsp;<span>{{result.succesNo}}</span></label>
+			</div>
+			<div class="alert alert-danger form-group">
+				<label><i class="glyphicon glyphicon-remove"></i>&nbsp;<span translate="result.failedNo">Wrong answers no</span>:&nbsp;<span>{{result.failedNo}}</span></label>
+			</div>
+			<div class="alert alert-info form-group" ng-show="result.time != undefined">
+				<label><span translate="result.remainingTime">Remaining time</span>:&nbsp;<span>{{result.time}}</span></label>		
+			</div>
+			<div class="alert alert-info form-group">
+				<label><span translate="result.tryNo">Try no</span>:&nbsp;<span>{{result.tryNo}}</span></label>		
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" ng-click="startTimer()" data-dismiss="modal" translate="button.back">Close</button>
+			<button type="button" class="btn btn-primary" ng-click="initialize()" data-dismiss="modal" translate="button.restart">Start new</button>
+		  </div>
+		</div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+		
+	<script type="text/javascript" src="lib/jquery/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="lib/angular/angular.js"></script>
+	<script type="text/javascript" src="lib/angular/angular-animate.js"></script>
+	<script type="text/javascript" src="lib/angular/angular-translate.js"></script>
+	<script type="text/javascript" src="lib/angular/angular-translate-loader-static-files.js"></script>
+	<script type="text/javascript" src="mathController.js"></script>
+	<script type="text/javascript">
+	</script>
+	
+	</body>
+
+</html>
