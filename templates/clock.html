@@ -1,0 +1,10 @@
+<div class="excercise {{actExcercise.resultClass}}">
+	<div class="clockCanvas">
+		<canvas clock width="200" height="200"></canvas>
+		<div>
+			<input numbers-only class="form-control" ng-model="actExcercise.inputHour" ng-focus="focus(actExcercise.itemIndex)"></input>
+			<input numbers-only class="form-control" ng-model="actExcercise.inputMinute" ng-focus="focus(actExcercise.itemIndex)"></input>
+			<label class="control-label {{actExcercise.resultIcon}}"></label>
+		</div>
+	</div>
+</div>	

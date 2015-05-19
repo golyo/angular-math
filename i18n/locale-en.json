@@ -1,0 +1,16 @@
+{
+    "global": {
+        "title": "global title",
+        "menu": {
+            "home": "Home"
+        }
+    },
+    "main": {
+        "title": "Welcome, Java Hipster!"
+    },
+    "errors": {
+        "title": "Error page!",
+        "403": "You are not authorized to access the page."
+    },
+    "footer": "This is your footer"
+}

@@ -1,0 +1,119 @@
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab">
+      <h4 class="panel-title" translate="config.defaultTitle">Default Settings</h4>
+    </div>
+    <div id="defaultSettings" class="panel-collapse collapse in">
+      <div class="panel-body">
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="showAll" translate="config.showAll">Show all</label>
+				<div class="col-sm-3">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" ng-model="settings.showAll" id="showAll">
+						</label>
+					</div>
+				</div>
+				<label class="control-label col-sm-3" for="timeInSec" translate="config.timeInSec">Time in sec:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.timeInSec" id="timeInSec">
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingAddition">
+      <h4 class="panel-title" translate="config.additionTitle">Addition Settings</h4>
+    </div>
+    <div id="additionSettings" class="panel-collapse collapse in">
+      <div class="panel-body">
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="additionNo" translate="config.additionNo">Addition no:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.addition.no" id="additionNo">
+				</div>
+				<label class="control-label col-sm-3" for="substractionNo" translate="config.substractionNo">Substraction no:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.substraction.no" id="substractionNo">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="additionMin" translate="config.additionMin">Addition min:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.addition.min" id="additionMin">
+				</div>
+				<label class="control-label col-sm-3" for="additionMax" translate="config.additionMax">Addition max:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.addition.max" id="additionMax">
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingMultiple">
+      <h4 class="panel-title" translate="config.multipleTitle">Multiple Settings</h4>
+    </div>
+    <div id="multipleSettings" class="panel-collapse collapse in">
+      <div class="panel-body">
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="multiplyNo" translate="config.multiplyNo">Multiply no:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.multiply.no" id="multiplyNo">
+				</div>
+				<label class="control-label col-sm-3" for="divisionNo" translate="config.divisionNo">Division no:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.division.no" id="divisionNo">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="multiplyMin" translate="config.multiplyMin">Multiply min:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.multiply.min" id="multiplyMin">
+				</div>
+				<label class="control-label col-sm-3" for="multiplyMax" translate="config.multiplyMax">Multiply max:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.multiply.max" id="multiplyMax">
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingClock">
+      <h4 class="panel-title" translate="config.clockTitle">Clock Settings</h4>
+    </div>
+    <div id="clockSettings" class="panel-collapse collapse in">
+      <div class="panel-body">
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="control-label col-sm-3" for="clockNo" translate="config.clockNo">Clock no:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.clock.no" id="clockNo">
+				</div>
+				<label class="control-label col-sm-3" for="clockTolerance" translate="config.clockTolerance">Clock tolerance:</label>
+				<div class="col-sm-3">
+					<input numbers-only class="form-control" ng-model="settings.clock.tolerance" id="clockTolerance">
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="well">
+	<div class="row">
+		<div class="col-sm-offset-3 col-sm-3">
+			<button ng-click="changeSettings()" class="btn btn-primary" translate="button.start">Start</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<div>
+	<div class="alert alert-success form-group">
+		<label><i class="glyphicon glyphicon-ok"></i>&nbsp;<span translate="result.succesNo">Good answers no</span>:&nbsp;<span>{{result.succesNo}}</span></label>
+	</div>
+	<div class="alert alert-danger form-group">
+		<label><i class="glyphicon glyphicon-remove"></i>&nbsp;<span translate="result.failedNo">Wrong answers no</span>:&nbsp;<span>{{result.failedNo}}</span></label>
+	</div>
+	<div class="alert alert-info form-group">
+		<label><span translate="result.tryNo">Try no</span>:&nbsp;<span>{{result.tryNo}}</span></label>	<br/>	
+		<label ng-show="result.time != undefined"><span translate="result.remainingTime">Remaining time</span>:&nbsp;<span>{{result.time}}</span></label>	
+	</div>
+	<div class="form-group">
+		<button type="button" class="btn btn-primary" ng-click="check()" data-dismiss="modal" translate="button.check">Check</button>
+		<button type="button" class="btn btn-primary" ng-click="reset()" data-dismiss="modal" translate="button.restart">Start new</button>
+	</div>
+</div>

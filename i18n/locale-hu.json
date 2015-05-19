@@ -1,0 +1,67 @@
+{
+    "global": {
+        "title": "Matek gyakorlatok",
+		"timeCounter": "Hátralévő idő",
+        "menu": {
+            "home": "Otthon"
+        }
+    },
+	"button": {
+		"start": "Start", 
+		"prev": "Előző",
+		"next": "Következő",
+		"finish": "Befejez",
+		"close": "Bezár",
+		"back": "Vissza",
+		"check": "Ellenőrzés",
+		"restart": "Új Feladatok"
+	},
+	"config": {
+		"defaultTitle": "Alap konfiguráció",
+		"additionTitle": "Összeadás konfiguráció",
+		"multipleTitle": "Kivonás konfiguráció",
+		"clockTitle": "Órás feladat konfiguráció",
+		"additionNo": "Összeadások száma",
+		"substractionNo": "Kivonások száma",
+		"additionMin": "Összeg minimuma",
+		"additionMax": "Összeg maximuma",
+		"multiplyNo": "Szorzások száma",
+		"divisionNo": "Osztások száma",
+		"multiplyMin": "Szorzandók minimuma",
+		"multiplyMax": "Szorzandók maximuma",
+		"clockNo": "Óra feladatok száma",
+		"clockTolerance": "Tévedés maximuma",
+		"timeInSec": "Idő (másodperc)",
+		"showAll": "Feladatok egyben"
+	},
+	"menu": {
+		"home": "Bemutatkozás",
+		"settings": "Beállítások",
+		"excercise": "Gyakorlás"
+	},
+	"excercise": {
+		"start": {
+			"title": "Feladatsor kezdés",
+			"body": "Ha felkészültél, indítsd el a feladatsort !"
+		}
+	},
+	"result": {
+		"title": "Eredmény",
+		"succesNo": "Helyes válaszok száma",
+		"failedNo": "Hibás válaszok száma",
+		"remainingTime": "Hátralévő idő",
+		"tryNo": "Próbálkozások száma"
+	},
+    "main": {
+        "title": "Üdvözöljük!",
+		"head1": "Az oldal célja, hogy iskolás korú gyerekek gyakorolhassák a kölünféle matematikai témájú feladatokat.",
+		"head2": "A 'Beállítások' menüpontban tudja konfigurálni a testreszabott feladatok típusát, nehézségét.",
+		"head3": "A 'Gyakorlás' menüpontban kezdhetjük a gyakorlást. Ha befejeztük, lehetőség van ellenőrzésre, ahol javíthatjuk hibáinkat.",
+		"head4": "Sok sikert!"
+    },
+    "errors": {
+        "title": "Error page!",
+        "403": "You are not authorized to access the page."
+    },
+    "footer": "This is your footer"
+}

@@ -1,0 +1,11 @@
+<div class="excercise {{actExcercise.resultClass}}">
+	<div>	
+		<input numbers-only class="form-control" ng-disabled="actExcercise.idx != 0" ng-model="actExcercise.values[0]" ng-focus="focus(actExcercise.itemIndex)"></input>
+		<span class="sign">{{actExcercise.sign}}</span>
+		<input numbers-only class="form-control" ng-disabled="actExcercise.idx != 1" ng-model="actExcercise.values[1]" ng-focus="focus(actExcercise.itemIndex)"></input>
+		<span class="sign">=</span>
+		<input numbers-only class="form-control" ng-disabled="actExcercise.idx != 2" ng-model="actExcercise.values[2]" ng-focus="focus(actExcercise.itemIndex)"></input>
+		<label class="control-label {{actExcercise.resultIcon}}"></label>	
+	</div>
+</div>
+
