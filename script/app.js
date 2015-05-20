@@ -1,9 +1,9 @@
 'use strict';
 
-var mathApp = angular.module('mathApp', ['ngAnimate', 'ngCookies', 'ui.router', 'pascalprecht.translate']);
+var mathApp = angular.module('mathApp', ['ngAnimate', 'ngCookies', 'ui.router', 'pascalprecht.translate', 'angular-google-analytics']);
 
 mathApp
-    .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $translateProvider, AnalyticsProvider) {
 		$stateProvider
 			.state('home', {
 				url: '/home',
@@ -44,6 +44,10 @@ mathApp
 		});
 		$translateProvider.preferredLanguage('hu');
 		$translateProvider.useSanitizeValueStrategy('escaped');
+		
+		AnalyticsProvider.setAccount('UA-5633719-2');
+		AnalyticsProvider.trackPages(true);
+		AnalyticsProvider.setPageEvent('$stateChangeSuccess');
 	})
 	.factory('TemplateService', function ($http) {
 		var cache = {};
