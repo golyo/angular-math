@@ -1,0 +1,14 @@
+<div class="well">
+	<div class="form-group">
+		<h2 translate="excercise.start.title"></h2>
+		<p translate="excercise.start.body"></p>
+		<div>
+			<select ng-options="item.label for item in existingTests" ng-model="selectedTest"></select>
+		</div>
+		<div>{{selectedTest}}</div>
+		<div ng-bind-html="loadedTest.html"></div>
+		<div>
+			<button ng-click="startTest()" class="btn btn-primary" translate="button.start">Start</button>
+		</div>
+	</div>
+</div>
