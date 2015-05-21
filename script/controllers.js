@@ -117,6 +117,29 @@ mathApp.controller('MainController', function ($scope, $interval, $compile, $loc
 	};
 });
 
+mathApp.controller('TestController', function ($scope, $interval, $compile, $location, $cookieStore, $state) {
+	$scope.existingTests = [ 
+		{
+			id: "1",
+			label: "zrinyi 2013/2",
+		},
+		{
+			id: "2",
+			label: "zrinyi 2013/3",
+		},
+		{
+			id: "4",
+			label: "zrinyi 2013/4",
+		},
+	];
+	$scope.loadedTest = {
+		html: "<div>alma</div>"
+	};
+		
+	$scope.startTest = function() {
+	};
+});
+
 mathApp.controller('LanguageController', function ($scope, $translate, LanguageService) {
         $scope.changeLanguage = function (languageKey) {
             $translate.use(languageKey);

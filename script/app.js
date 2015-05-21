@@ -1,9 +1,9 @@
 'use strict';
 
-var mathApp = angular.module('mathApp', ['ngAnimate', 'ngCookies', 'ui.router', 'pascalprecht.translate']);
+var mathApp = angular.module('mathApp', ['ngAnimate', 'ngCookies', 'ngSanitize', 'ui.router', 'pascalprecht.translate', 'angular-google-analytics']);
 
 mathApp
-    .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $translateProvider, AnalyticsProvider) {
 		$stateProvider
 			.state('home', {
 				url: '/home',
@@ -34,7 +34,22 @@ mathApp
 			.state('excercises.settings', {
 				url: '/settings',
 				templateUrl: 'views/excercises_settings.html'
-			});
+			})
+			.state('test.settings', {
+				url: '/settings',
+				templateUrl: 'views/excercises_settings.html'
+			})
+			.state('test', {
+				controller:'TestController',
+				abstract: true,
+				url: '/test',
+				template: '<ui-view/>'
+			})
+			.state('test.start', {
+				url: '',
+				templateUrl: 'views/test_start.html'
+			})
+			;
 		$urlRouterProvider
 			.otherwise('/home');
 
@@ -45,9 +60,9 @@ mathApp
 		$translateProvider.preferredLanguage('hu');
 		$translateProvider.useSanitizeValueStrategy('escaped');
 		
-		//AnalyticsProvider.setAccount('UA-5633719-2');
-		//AnalyticsProvider.trackPages(true);
-		//AnalyticsProvider.setPageEvent('$stateChangeSuccess');
+		AnalyticsProvider.setAccount('UA-5633719-2');
+		AnalyticsProvider.trackPages(true);
+		AnalyticsProvider.setPageEvent('$stateChangeSuccess');
 	})
 	.factory('TemplateService', function ($http) {
 		var cache = {};
