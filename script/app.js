@@ -1,6 +1,6 @@
 'use strict';
 
-var mathApp = angular.module('mathApp', ['ngAnimate', 'ngCookies', 'ngSanitize', 'ui.router', 'pascalprecht.translate', 'angular-google-analytics']);
+var mathApp = angular.module('mathApp', ['ngCookies', 'ngSanitize', 'ui.router', 'pascalprecht.translate', 'angular-google-analytics', 'ui.bootstrap']);
 
 mathApp
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, AnalyticsProvider) {
@@ -35,19 +35,15 @@ mathApp
 				url: '/settings',
 				templateUrl: 'views/excercises_settings.html'
 			})
-			.state('test.settings', {
-				url: '/settings',
-				templateUrl: 'views/excercises_settings.html'
-			})
-			.state('test', {
-				controller:'TestController',
+			.state('maintain', {
+				controller:'MaintainController',
 				abstract: true,
-				url: '/test',
+				url: '/maintain',
 				template: '<ui-view/>'
 			})
-			.state('test.start', {
+			.state('maintain.start', {
 				url: '',
-				templateUrl: 'views/test_start.html'
+				templateUrl: 'views/maintainance.html'			
 			})
 			;
 		$urlRouterProvider

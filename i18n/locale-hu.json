@@ -4,7 +4,9 @@
 		"timeCounter": "Hátralévő idő",
         "menu": {
             "home": "Otthon"
-        }
+        },
+		"confirmTitle": "Megerősítés",
+		"confirmDelete": "Biztosan törli a kiválasztott elemet ?"
     },
 	"button": {
 		"start": "Start", 
@@ -14,7 +16,11 @@
 		"close": "Bezár",
 		"back": "Vissza",
 		"check": "Ellenőrzés",
-		"restart": "Új Feladatok"
+		"restart": "Új Feladatok",
+		"new": "Új",
+		"cancel": "Mégsem",
+		"ok": "Igen",
+		"save": "Mentés"
 	},
 	"config": {
 		"defaultTitle": "Alap konfiguráció",
@@ -33,6 +39,10 @@
 		"clockTolerance": "Tévedés maximuma",
 		"timeInSec": "Idő (másodperc)",
 		"showAll": "Feladatok egyben"
+	},	
+	"maintenance": {
+		"title": "Feladatsor szerkesztése",
+		"body": "Készítse el saját feladatsorát!"
 	},
 	"menu": {
 		"home": "Bemutatkozás",

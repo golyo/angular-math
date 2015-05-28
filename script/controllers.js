@@ -117,27 +117,35 @@ mathApp.controller('MainController', function ($scope, $interval, $compile, $loc
 	};
 });
 
-mathApp.controller('TestController', function ($scope, $interval, $compile, $location, $cookieStore, $state) {
-	$scope.existingTests = [ 
+mathApp.controller('MaintainController', function ($scope, $interval, $compile, $location, $cookieStore, $state) {
+	
+	$scope.excercises = [
 		{
-			id: "1",
-			label: "zrinyi 2013/2",
-		},
-		{
-			id: "2",
-			label: "zrinyi 2013/3",
-		},
-		{
-			id: "4",
-			label: "zrinyi 2013/4",
-		},
+			//html: "<p>title</p><p><span class=\"math-tex\">\\(x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}\\)</span></p>"
+			html: "<p>test1</p>"
+		}
 	];
-	$scope.loadedTest = {
-		html: "<div>alma</div>"
+	$scope.addNew = function() {
+		destroyEditor($scope);
+		$("#excercises").append("<div class=\"nnnnnn\" id=\"excercise_" + $scope.excercises.length + "\"></div>");
+		startEditor($scope, $scope.excercises.length);
 	};
-		
-	$scope.startTest = function() {
+	$scope.cancel = function() {
+		destroyEditor($scope, true);
+		//addEditor($scope);
 	};
+	$scope.editItem = function(idx) {
+		destroyEditor($scope, true);
+		startEditor($scope, idx);
+	};
+	$scope.deleteItem = function(idx) {
+		$scope.excercises.splice(idx,1);
+		console.log("delete " + idx);
+	};
+	$scope.save = function() {
+		destroyEditor($scope);
+		//addEditor($scope);
+	};  
 });
 
 mathApp.controller('LanguageController', function ($scope, $translate, LanguageService) {
@@ -156,6 +164,19 @@ mathApp.controller('LanguageController', function ($scope, $translate, LanguageS
 
 mathApp.controller('MenuController', function ($scope) {
     });
+
+mathApp.controller('ModalConfirmController', function ($scope, $modalInstance, confirmConfig) {
+		$scope.confirmOk = function () {
+			$modalInstance.close();
+			confirmConfig.onSuccess();
+			console.log("confirmOk");
+		};
+		$scope.confirmConfig = confirmConfig;
+		$scope.confirmCancel = function () {
+			$modalInstance.dismiss('cancel');
+			console.log("confirmCancel");
+		};
+	});
 
 	
 var DefaultSettings = {
@@ -321,3 +342,36 @@ var ExcerciseUtil = {
 	}
 };
 
+var destroyEditor = function($scope, revert) {
+	if ($scope.actckeditor ) {
+		var original = $scope.actual;
+		var $original = $("#excercise_" + original.idx);
+		if (original.idx >= $scope.excercises.length) {
+			$original.remove();
+		}
+		if (!revert || original.idx < $scope.excercises.length) {
+			$scope.excercises[original.idx] = {
+				html: revert ? original.html : $scope.actckeditor.getData()
+			};
+			console.log("Saved: " + $scope.excercises[original.idx]);
+		}
+		
+		$scope.actckeditor.destroy();
+		$scope.actckeditor = undefined;
+		$scope.actual = undefined;
+	}
+};
+
+var startEditor = function($scope, index) {
+	var $target = $("#excercise_" + index);
+	if ($target && $target.size() > 0) {		
+		$target.find("span.math-tex").each(function() {
+			var $this = $(this);
+			var $tscript = $this.find("script[type='math/tex']");
+			$this.html("\\(" + $tscript.text() + "\\)");
+		});
+		//$scope.actckeditor = CKEDITOR.replace($target.get(0), {extraPlugins: 'mathjax' });
+		$scope.actckeditor = CKEDITOR.replace($target.get(0));
+		$scope.actual = {idx: index, html: $target.html()};
+	}
+};

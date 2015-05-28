@@ -52,7 +52,50 @@ angular.module('mathApp')
 				});
 			}
 		};
-	});
+	})
+	.directive('mathTest', function($timeout){
+		return {
+			restrict:'A',
+			link: function($scope, element) {
+				console.log("mathTest link succes");
+				console.log(element);
+				$timeout(function(){
+//					MathJax.Hub.Queue(["Typeset", MathJax.Hub, element.get(0)]);
+				},0)
+			}
+		};
+	})
+	.directive('ngConfirmClick', function($parse, $modal){
+		return {
+			priority: -1,
+			restrict: 'A',
+			compile: function($element, attr) {
+				var fn = $parse(attr.ngConfirmClick, null, true);
+					return function ngEventHandler(scope, element) {
+						element.on("click", function(event) {
+							var $this = $(this);
+							$modal.open({
+								animation: true,
+								templateUrl: 'confirmContent.html',
+								controller: 'ModalConfirmController',
+								resolve: {
+									confirmConfig : function() {
+										return {
+											onSuccess: function() { fn(scope, {$event:event}); },
+											title: $this.attr("confirm-title"),
+											body: $this.attr("confirm-body")
+										};
+									}
+								}								
+							});								
+						});
+					};
+				}
+			}
+		}
+	)	
+	;
+
 	
 //Clock draw script:
 //http://www.w3schools.com/canvas/canvas_clock_start.asp
