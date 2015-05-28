@@ -4,7 +4,9 @@
 		"timeCounter": "Hátralévő idő",
         "menu": {
             "home": "Otthon"
-        }
+        },
+		"confirmTitle": "Megerősítés",
+		"confirmDelete": "Biztosan törli a kiválasztott elemet ?"
     },
 	"button": {
 		"start": "Start", 
@@ -14,7 +16,11 @@
 		"close": "Bezár",
 		"back": "Vissza",
 		"check": "Ellenőrzés",
-		"restart": "Új Feladatok"
+		"restart": "Új Feladatok",
+		"new": "Új",
+		"cancel": "Mégsem",
+		"ok": "Igen",
+		"save": "Mentés"
 	},
 	"config": {
 		"defaultTitle": "Alap konfiguráció",
@@ -33,6 +39,10 @@
 		"clockTolerance": "Tévedés maximuma",
 		"timeInSec": "Idő (másodperc)",
 		"showAll": "Feladatok egyben"
+	},	
+	"maintenance": {
+		"title": "Feladatsor szerkesztése",
+		"body": "Készítse el saját feladatsorát!"
 	},
 	"menu": {
 		"home": "Bemutatkozás",
@@ -54,7 +64,7 @@
 	},
     "main": {
         "title": "Üdvözöljük!",
-		"head1": "Az oldal célja, hogy iskolás korú gyerekek gyakorolhassák a kölünféle matematikai témájú feladatokat.",
+		"head1": "Az oldal célja, hogy iskolás korú gyerekek gyakorolhassák a különféle matematikai témájú feladatokat.",
 		"head2": "A 'Beállítások' menüpontban tudja konfigurálni a testreszabott feladatok típusát, nehézségét.",
 		"head3": "A 'Gyakorlás' menüpontban kezdhetjük a gyakorlást. Ha befejeztük, lehetőség van ellenőrzésre, ahol javíthatjuk hibáinkat.",
 		"head4": "Sok sikert!"

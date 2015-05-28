@@ -1,9 +1,16 @@
 'use strict';
 
-var mathApp = angular.module('mathApp', ['ngAnimate', 'ngCookies', 'ui.router', 'pascalprecht.translate']);
+var mathApp = angular.module('mathApp', ['ngCookies', 'ngSanitize', 'ui.router', 'pascalprecht.translate', 'angular-google-analytics', 'ui.bootstrap']);
+
+var MathJax = undefined;
+var useMathJax = true;
+var mathJaxUrl = 'http:\/\/cdn.mathjax.org\/mathjax\/2.2-latest\/MathJax.js?config=TeX-AMS_HTML';
 
 mathApp
-    .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $translateProvider, AnalyticsProvider) {
+		if (useMathJax) {
+			$("body").append('<script src="' + mathJaxUrl + '"></script>');
+		}
 		$stateProvider
 			.state('home', {
 				url: '/home',
@@ -34,7 +41,18 @@ mathApp
 			.state('excercises.settings', {
 				url: '/settings',
 				templateUrl: 'views/excercises_settings.html'
-			});
+			})
+			.state('maintain', {
+				controller:'MaintainController',
+				abstract: true,
+				url: '/maintain',
+				template: '<ui-view/>'
+			})
+			.state('maintain.start', {
+				url: '',
+				templateUrl: 'views/maintainance.html'			
+			})
+			;
 		$urlRouterProvider
 			.otherwise('/home');
 
@@ -44,6 +62,10 @@ mathApp
 		});
 		$translateProvider.preferredLanguage('hu');
 		$translateProvider.useSanitizeValueStrategy('escaped');
+		
+		AnalyticsProvider.setAccount('UA-5633719-2');
+		AnalyticsProvider.trackPages(true);
+		AnalyticsProvider.setPageEvent('$stateChangeSuccess');
 	})
 	.factory('TemplateService', function ($http) {
 		var cache = {};

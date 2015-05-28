@@ -10,7 +10,6 @@ angular.module('mathApp')
 			link: function($scope, element, attrs, modelCtrl) {
 				var onModelChanged = function(value) {
 					$scope.actExcercise = value;
-					console.log(value);
 					if (value) {
 						TemplateService.getTemplate(value.template).then(function (response) {
 							element.html(response.data);
@@ -53,8 +52,50 @@ angular.module('mathApp')
 				});
 			}
 		};
-	});
-	
+	})
+	.directive('mathTest', function($timeout){
+		return {
+			restrict:'A',
+			link: function($scope, element) {
+				$timeout(function(){
+					if (useMathJax && MathJax) {
+						MathJax.Hub.Queue(["Typeset", MathJax.Hub, element.get(0)]);
+					}
+				},0)
+			}
+		};
+	})
+	.directive('ngConfirmClick', function($parse, $modal){
+		return {
+			priority: -1,
+			restrict: 'A',
+			compile: function($element, attr) {
+				var fn = $parse(attr.ngConfirmClick, null, true);
+					return function ngEventHandler(scope, element) {
+						element.on("click", function(event) {
+							var $this = $(this);
+							$modal.open({
+								animation: true,
+								templateUrl: 'confirmContent.html',
+								controller: 'ModalConfirmController',
+								resolve: {
+									confirmConfig : function() {
+										return {
+											onSuccess: function() { fn(scope, {$event:event}); },
+											title: $this.attr("confirm-title"),
+											body: $this.attr("confirm-body")
+										};
+									}
+								}								
+							});								
+						});
+					};
+				}
+			}
+		}
+	)	
+	;
+
 //Clock draw script:
 //http://www.w3schools.com/canvas/canvas_clock_start.asp
 var ClockUtil = {	

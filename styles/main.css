@@ -3,6 +3,16 @@ input[numbers-only].form-control {
 	text-align: center;
 }
 
+div.editable {
+  border: 2px solid #8AC007;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.excerciseButtons {
+	float: right;
+}
+
 .excercise input {
 	display: inline-block;
 }
@@ -15,10 +25,6 @@ input[numbers-only].form-control {
 	width: 20px;
 	text-align: center;
 	display: inline-block;
-}
-
-button {
-	margin-right: 20px;
 }
 		
 .sample-show-hide {
