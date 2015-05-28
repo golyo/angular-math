@@ -5,11 +5,13 @@
 
 		<div id="excercises">
 			<div ng-repeat="ex in excercises"  class="panel panel-default">
-				<div ng-show="actual.idx != $index" class="excerciseButtons">
-					<button class="btn btn-primary btn-xs" ng-click="editItem($index)"><span class="glyphicon glyphicon-edit"></span></button>
-					<button class="btn btn-primary btn-xs" ng-confirm-click="deleteItem($index)" confirm-title="{{'global.confirmTitle' | translate}}" confirm-body="{{'global.confirmDelete' | translate}}"><span class="glyphicon glyphicon-remove"></span></br></button>				
+				<div class="panel-heading">
+					<span>{{$index+1 + "."}}</span>
+					<div ng-show="actual.idx != $index" class="excerciseButtons">
+						<button class="btn btn-primary btn-xs" ng-click="editItem($index)"><span class="glyphicon glyphicon-edit"></span></button>
+						<button class="btn btn-primary btn-xs" ng-confirm-click="deleteItem($index)" confirm-title="{{'global.confirmTitle' | translate}}" confirm-body="{{'global.confirmDelete' | translate}}"><span class="glyphicon glyphicon-remove"></span></br></button>				
+					</div>
 				</div>
-				<div class="panel-heading">{{$index+1 + "."}}</div>
 				<div class="panel-body" id="{{'excercise_' + $index}}" math-test>
 					<div ng-bind-html="ex.html"></div>
 				</div>
