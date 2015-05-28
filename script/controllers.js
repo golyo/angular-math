@@ -121,8 +121,8 @@ mathApp.controller('MaintainController', function ($scope, $interval, $compile, 
 	
 	$scope.excercises = [
 		{
-			//html: "<p>title</p><p><span class=\"math-tex\">\\(x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}\\)</span></p>"
-			html: "<p>test1</p>"
+			html: "<p>title</p><p><span class=\"math-tex\">\\(x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}\\)</span></p>"
+			//html: "<p>test1</p>"
 		}
 	];
 	$scope.addNew = function() {
@@ -368,8 +368,11 @@ var startEditor = function($scope, index) {
 			var $tscript = $this.find("script[type='math/tex']");
 			$this.html("\\(" + $tscript.text() + "\\)");
 		});
-		//$scope.actckeditor = CKEDITOR.replace($target.get(0), {extraPlugins: 'mathjax' });
-		$scope.actckeditor = CKEDITOR.replace($target.get(0));
+		if (useMathJax) {
+			$scope.actckeditor = CKEDITOR.replace($target.get(0), {extraPlugins: 'mathjax' });
+		} else {
+			$scope.actckeditor = CKEDITOR.replace($target.get(0));
+		}
 		$scope.actual = {idx: index, html: $target.html()};
 		$("#editorButtons").appendTo($target.parent());
 	}	

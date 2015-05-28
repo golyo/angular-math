@@ -2,8 +2,15 @@
 
 var mathApp = angular.module('mathApp', ['ngCookies', 'ngSanitize', 'ui.router', 'pascalprecht.translate', 'angular-google-analytics', 'ui.bootstrap']);
 
+var MathJax = undefined;
+var useMathJax = true;
+var mathJaxUrl = 'http:\/\/cdn.mathjax.org\/mathjax\/2.2-latest\/MathJax.js?config=TeX-AMS_HTML';
+
 mathApp
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, AnalyticsProvider) {
+		if (useMathJax) {
+			$("body").append('<script src="' + mathJaxUrl + '"></script>');
+		}
 		$stateProvider
 			.state('home', {
 				url: '/home',
