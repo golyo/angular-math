@@ -127,7 +127,7 @@ mathApp.controller('MaintainController', function ($scope, $interval, $compile, 
 	];
 	$scope.addNew = function() {
 		destroyEditor($scope);
-		$("#excercises").append("<div class=\"nnnnnn\" id=\"excercise_" + $scope.excercises.length + "\"></div>");
+		$("#excercises").append("<div><div class=\"panel-body\" id=\"excercise_" + $scope.excercises.length + "\"></div></div>");
 		startEditor($scope, $scope.excercises.length);
 	};
 	$scope.cancel = function() {
@@ -135,12 +135,12 @@ mathApp.controller('MaintainController', function ($scope, $interval, $compile, 
 		//addEditor($scope);
 	};
 	$scope.editItem = function(idx) {
-		destroyEditor($scope, true);
+		destroyEditor($scope);
 		startEditor($scope, idx);
 	};
 	$scope.deleteItem = function(idx) {
+		destroyEditor($scope);
 		$scope.excercises.splice(idx,1);
-		console.log("delete " + idx);
 	};
 	$scope.save = function() {
 		destroyEditor($scope);
@@ -169,12 +169,10 @@ mathApp.controller('ModalConfirmController', function ($scope, $modalInstance, c
 		$scope.confirmOk = function () {
 			$modalInstance.close();
 			confirmConfig.onSuccess();
-			console.log("confirmOk");
 		};
 		$scope.confirmConfig = confirmConfig;
 		$scope.confirmCancel = function () {
 			$modalInstance.dismiss('cancel');
-			console.log("confirmCancel");
 		};
 	});
 
@@ -344,6 +342,7 @@ var ExcerciseUtil = {
 
 var destroyEditor = function($scope, revert) {
 	if ($scope.actckeditor ) {
+		$("#editorButtons").appendTo($("#editorContainer"));
 		var original = $scope.actual;
 		var $original = $("#excercise_" + original.idx);
 		if (original.idx >= $scope.excercises.length) {
@@ -353,7 +352,6 @@ var destroyEditor = function($scope, revert) {
 			$scope.excercises[original.idx] = {
 				html: revert ? original.html : $scope.actckeditor.getData()
 			};
-			console.log("Saved: " + $scope.excercises[original.idx]);
 		}
 		
 		$scope.actckeditor.destroy();
@@ -363,7 +361,7 @@ var destroyEditor = function($scope, revert) {
 };
 
 var startEditor = function($scope, index) {
-	var $target = $("#excercise_" + index);
+	var $target = $("#excercise_" + index);	
 	if ($target && $target.size() > 0) {		
 		$target.find("span.math-tex").each(function() {
 			var $this = $(this);
@@ -373,5 +371,6 @@ var startEditor = function($scope, index) {
 		//$scope.actckeditor = CKEDITOR.replace($target.get(0), {extraPlugins: 'mathjax' });
 		$scope.actckeditor = CKEDITOR.replace($target.get(0));
 		$scope.actual = {idx: index, html: $target.html()};
-	}
+		$("#editorButtons").appendTo($target.parent());
+	}	
 };

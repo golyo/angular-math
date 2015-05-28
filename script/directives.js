@@ -57,8 +57,6 @@ angular.module('mathApp')
 		return {
 			restrict:'A',
 			link: function($scope, element) {
-				console.log("mathTest link succes");
-				console.log(element);
 				$timeout(function(){
 //					MathJax.Hub.Queue(["Typeset", MathJax.Hub, element.get(0)]);
 				},0)

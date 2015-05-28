@@ -1,27 +1,26 @@
 <div class="well">
-	<div class="form-group" id="testDiv">
+	<div class="form-group" id="editorContainer">
 		<h2 translate="maintenance.title"></h2>
 		<p translate="maintenance.body"></p>
 
 		<div id="excercises">
-			<div ng-repeat="ex in excercises">
-				<div ng-show="actual.idx != $index" style="float:right">
-					<button class="btn btn-primary btn-xs" ><span class="glyphicon glyphicon-edit" ng-click="editItem($index)"></span></button>
+			<div ng-repeat="ex in excercises"  class="panel panel-default">
+				<div ng-show="actual.idx != $index" class="excerciseButtons">
+					<button class="btn btn-primary btn-xs" ng-click="editItem($index)"><span class="glyphicon glyphicon-edit"></span></button>
 					<button class="btn btn-primary btn-xs" ng-confirm-click="deleteItem($index)" confirm-title="{{'global.confirmTitle' | translate}}" confirm-body="{{'global.confirmDelete' | translate}}"><span class="glyphicon glyphicon-remove"></span></br></button>				
 				</div>
-				<div id="{{'excercise_' + $index}}" class="editable" math-test>
+				<div class="panel-heading">{{$index+1 + "."}}</div>
+				<div class="panel-body" id="{{'excercise_' + $index}}" math-test>
 					<div ng-bind-html="ex.html"></div>
 				</div>
 			</div>
 		</div>
-		<p>
-		<div ng-show="actckeditor">
-			<button ng-click="save()" class="btn btn-primary" translate="button.save">Save</button>
-			<button ng-click="cancel()" class="btn btn-primary" translate="button.cancel">Cancel</button>
-		</div>
 		<div ng-show="!actckeditor">
 			<button ng-click="addNew()" class="btn btn-primary" translate="button.new">New</button>
 		</div>
-		</p>
+		<div id="editorButtons" ng-show="actckeditor">
+			<button ng-click="save()" class="btn btn-primary" translate="button.save">Save</button>
+			<button ng-click="cancel()" class="btn btn-primary" translate="button.cancel">Cancel</button>
+		</div>
 	</div>
 </div>

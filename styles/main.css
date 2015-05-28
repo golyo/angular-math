@@ -5,8 +5,14 @@ input[numbers-only].form-control {
 
 div.editable {
   border: 2px solid #8AC007;
-  padding: 15px;
+  padding: 10px;
   margin-top: 10px;
+}
+
+.excerciseButtons {
+	float: right;
+	padding-right: 5px;
+	padding-top: 5px;
 }
 
 .excercise input {
