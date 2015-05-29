@@ -119,16 +119,18 @@ mathApp.controller('MainController', function ($scope, $interval, $compile, $loc
 
 mathApp.controller('MaintainController', function ($scope, $interval, $compile, $location, $cookieStore, $state, $modal) {
 	
-	$scope.excercises = [
-		{
-			html: "<p>title</p><p><span class=\"math-tex\">\\(x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}\\)</span></p>",
-			results: [{val:"12", right:false}, {val:"24", right:true}, {val:"36", right:false}, {val:"48", right:false}]
-		}
-	];
+	$scope.lesson = {
+		excercises: [
+						{
+							html: "<p>title</p><p><span class=\"math-tex\">\\(x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}\\)</span></p>",
+							results: [{val:"12", right:false}, {val:"24", right:true}, {val:"36", right:false}, {val:"48", right:false}]
+						}
+					]
+	};
 	$scope.addNew = function() {
 		EditorUtils.destroyEditor($scope);
-		$("#excercises").append("<div><div class=\"panel-body\" id=\"excercise_" + $scope.excercises.length + "\"></div></div>");
-		EditorUtils.startEditor($scope, $scope.excercises.length);
+		$("#excercises").append("<div><div class=\"panel-body\" id=\"excercise_" + $scope.lesson.excercises.length + "\"></div></div>");
+		EditorUtils.startEditor($scope, $scope.lesson.excercises.length);
 	};
 	$scope.cancel = function() {
 		EditorUtils.destroyEditor($scope, true);
@@ -139,19 +141,38 @@ mathApp.controller('MaintainController', function ($scope, $interval, $compile, 
 	};
 	$scope.deleteItem = function(idx) {
 		EditorUtils.destroyEditor($scope);
-		$scope.excercises.splice(idx,1);
+		$scope.lesson.excercises.splice(idx,1);
 	};
 	$scope.save = function() {
 		EditorUtils.destroyEditor($scope);
 	};  
 	$scope.addResult = function(idx) {
-		$scope.excercises[idx].results.push({val:"", right:false});
+		$scope.lesson.excercises[idx].results.push({val:"", right:false});
 	};
 	$scope.deleteLastResult = function(idx) {
-		$scope.excercises[idx].results.pop();
+		$scope.lesson.excercises[idx].results.pop();
 	};
 	$scope.getChar = function(idx) {
 		return String.fromCharCode(97 + idx);
+	};
+	$scope.goToView = function() {
+		$location.path('/maintain/view');
+	};
+	$scope.goToMaintainView = function() {
+		$location.path('/maintain');	
+	};
+	$scope.getJson = function() {
+		if (!$scope.lesson.name || !$scope.lesson.year || !$scope.lesson.classNo) {
+			MainUtil.showWarning($modal, "Hiba", "Name, Year or ClassNo is null");
+		} else {
+			var toJSON = angular.toJson($scope.lesson);
+			var blob = new Blob([toJSON], { type:"application/json;charset=utf-8;" });			
+			var downloadLink = angular.element('<a id="testdownload"></a>');
+			downloadLink.attr('href',window.URL.createObjectURL(blob));
+			var fname = $scope.lesson.name + "." + $scope.lesson.year + "." + $scope.lesson.classNo + ".json";
+			downloadLink.attr('download', fname.replace(/ /g, '_'));
+			downloadLink[0].click();
+		}		
 	};
 });
 
@@ -312,13 +333,22 @@ var ExcerciseDefs = {
 	}
 };
 
-var checkHasEmpty = function(arr) {
-	for (var i=0; i<arr.length; i++) {
-		if (!arr[i]) {
-			return true;
-		}
+var MainUtil = {
+	showWarning: function($modal, title, body) {
+		$modal.open({
+			animation: true,
+			templateUrl: 'confirmContent.html',
+			controller: 'ModalConfirmController',
+			resolve: {
+				confirmConfig : function() {
+					return {
+						title: title,
+						body: body
+					};
+				}
+			}								
+		});								
 	}
-	return false;
 };
 
 var ExcerciseUtil = {
@@ -363,21 +393,21 @@ var EditorUtils = {
 		if ($scope.actckeditor ) {
 			$("#editorButtons").appendTo($("#editorContainer"));
 			var original = $scope.original;
-			var $original = $("#excercise_" + (original ? original.idx : $scope.excercises.length));
+			var $original = $("#excercise_" + (original ? original.idx : $scope.lesson.excercises.length));
 			if (!original) {
 				//if new item
 				$original.remove();
 				if (!revert) {
 					//add new
-					$scope.excercises.push( {
+					$scope.lesson.excercises.push( {
 						html: $scope.actckeditor.getData(),
 						results: [{val:"", right:true}]
 					} );
 				}
 			} else {
-				var newValue = angular.copy($scope.excercises[original.idx]);
+				var newValue = angular.copy($scope.lesson.excercises[original.idx]);
 				newValue.html = revert ? original.html : $scope.actckeditor.getData();
-				$scope.excercises[original.idx] = newValue;
+				$scope.lesson.excercises[original.idx] = newValue;
 			}
 			$scope.actckeditor.destroy();		
 			$scope.actckeditor = undefined;
@@ -397,7 +427,7 @@ var EditorUtils = {
 			} else {
 				$scope.actckeditor = CKEDITOR.replace($target.get(0));
 			}		
-			$scope.original = index < $scope.excercises.length ? {idx: index, html: $scope.excercises[index].html} : undefined;
+			$scope.original = index < $scope.lesson.excercises.length ? {idx: index, html: $scope.lesson.excercises[index].html} : undefined;
 			$("#editorButtons").insertAfter($target);
 		}	
 	}

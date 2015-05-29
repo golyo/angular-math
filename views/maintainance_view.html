@@ -1,0 +1,31 @@
+<div class="well">
+	<div class="form-group" id="editorContainer">
+		<h2>{{lesson.name}}</h2>
+		<p>Year: {{lesson.year}}</p>
+		<p>ClassNo: {{lesson.classNo}}</p>
+
+		<div id="excercises">
+		
+			<div ng-repeat="ex in lesson.excercises"  class="panel panel-primary">
+				<div class="panel-heading">
+					<span>{{$index+1 + "."}}</span>
+				</div>
+				<div class="panel-body">
+					<div ng-bind-html="ex.html" math-test></div>
+				</div>
+				<hr/>
+				<div class="panel-body">
+					<span class="resultInput" ng-repeat="rs in ex.results">
+						<span style="position:relative;top:-2px;">{{"(" + getChar($index) + ") " + rs.val}}</span>
+						<input type="checkbox" ng-model="rs.tip" ></input>
+						<br/>
+						
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="editorButtons">
+			<button ng-click="goToMaintainView()" class="btn btn-primary" translate="button.back">Back</button>
+		</div>
+	</div>
+</div>

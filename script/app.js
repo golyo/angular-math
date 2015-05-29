@@ -3,7 +3,7 @@
 var mathApp = angular.module('mathApp', ['ngCookies', 'ngSanitize', 'ui.router', 'pascalprecht.translate', 'angular-google-analytics', 'ui.bootstrap']);
 
 var MathJax = undefined;
-var useMathJax = true;
+var useMathJax = false;
 var mathJaxUrl = 'http:\/\/cdn.mathjax.org\/mathjax\/2.2-latest\/MathJax.js?config=TeX-AMS_HTML';
 
 mathApp
@@ -51,6 +51,10 @@ mathApp
 			.state('maintain.start', {
 				url: '',
 				templateUrl: 'views/maintainance.html'			
+			})
+			.state('maintain.view', {
+				url: '/view',
+				templateUrl: 'views/maintainance_view.html'			
 			})
 			;
 		$urlRouterProvider
