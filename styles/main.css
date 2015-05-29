@@ -3,10 +3,30 @@ input[numbers-only].form-control {
 	text-align: center;
 }
 
+input.w150 {
+	max-width:150px;
+	display: inline;
+}
+
 div.editable {
   border: 2px solid #8AC007;
   padding: 10px;
   margin-top: 10px;
+}
+
+hr {
+	margin: 0px;
+}
+
+.resultInput {
+	display: inline-block;
+	text-align: center;
+	margin: 0px 5px;
+}
+
+.panel-primary>.panel-heading.resultHolder {
+	background-color: fbfbfb;
+	color: black;
 }
 
 .excerciseButtons {

@@ -4,16 +4,29 @@
 		<p translate="maintenance.body"></p>
 
 		<div id="excercises">
-			<div ng-repeat="ex in excercises"  class="panel panel-default">
+			<div ng-repeat="ex in excercises"  class="panel panel-primary">
 				<div class="panel-heading">
 					<span>{{$index+1 + "."}}</span>
 					<div ng-show="actual.idx != $index" class="excerciseButtons">
-						<button class="btn btn-primary btn-xs" ng-click="editItem($index)"><span class="glyphicon glyphicon-edit"></span></button>
-						<button class="btn btn-primary btn-xs" ng-confirm-click="deleteItem($index)" confirm-title="{{'global.confirmTitle' | translate}}" confirm-body="{{'global.confirmDelete' | translate}}"><span class="glyphicon glyphicon-remove"></span></br></button>				
+						<button class="btn btn-warning btn-xs" ng-confirm-click="deleteItem($index)" confirm-title="{{'global.confirmTitle' | translate}}" confirm-body="{{'global.confirmDelete' | translate}}"><span class="glyphicon glyphicon-remove"></span></button>				
+						<button class="btn btn-success btn-xs" ng-click="editItem($index)"><span class="glyphicon glyphicon-edit"></span></button>
 					</div>
 				</div>
-				<div class="panel-body" id="{{'excercise_' + $index}}" math-test>
-					<div ng-bind-html="ex.html"></div>
+				<div class="panel-body" id="{{'excercise_' + $index}}">
+					<div ng-bind-html="ex.html" math-test></div>
+				</div>
+				<hr/>
+				<div class="panel-body">
+					<div ng-show="actual.idx != $index" class="excerciseButtons">
+						<button class="btn btn-warning btn-xs" ng-click="deleteLastResult($index)" ng-show="ex.results.length > 1"><span class="glyphicon glyphicon-minus"></span></button>				
+						<button class="btn btn-success btn-xs" ng-click="addResult($index)"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+					<span class="resultInput" ng-repeat="rs in ex.results">
+						<span style="position:relative;top:-2px;">{{"(" + getChar($index) + ") "}}</span>
+						<input type="checkbox" ng-model="rs.right" ></input>
+						<br/>						
+						<input ng-model="rs.val" class="form-control w150"></input>
+					</span>
 				</div>
 			</div>
 		</div>
@@ -22,7 +35,7 @@
 		</div>
 		<div id="editorButtons" ng-show="actckeditor">
 			<button ng-click="save()" class="btn btn-primary" translate="button.save">Save</button>
-			<button ng-click="cancel()" class="btn btn-primary" translate="button.cancel">Cancel</button>
+			<button ng-click="cancel()" class="btn btn-warning" translate="button.cancel">Cancel</button>
 		</div>
 	</div>
 </div>
