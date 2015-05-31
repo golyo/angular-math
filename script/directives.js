@@ -65,6 +65,18 @@ angular.module('mathApp')
 			}
 		};
 	})
+	/*
+	.directive('ngDownloadData', function($timeout){
+		return {
+			restrict:'A',
+			scope:{ getUrlData:'&ngDownloadData'},
+			link:function (scope, element, attrs) {
+				var url = URL.createObjectURL(scope.getUrlData());
+				element.attr("href", url);
+			}
+		};
+	})
+	*/
 	.directive('ngConfirmClick', function($parse, $modal){
 		return {
 			priority: -1,
@@ -96,7 +108,6 @@ angular.module('mathApp')
 	)	
 	;
 
-	
 //Clock draw script:
 //http://www.w3schools.com/canvas/canvas_clock_start.asp
 var ClockUtil = {	

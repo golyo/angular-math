@@ -4,25 +4,62 @@
 		<p translate="maintenance.body"></p>
 
 		<div id="excercises">
-			<div ng-repeat="ex in excercises"  class="panel panel-default">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="name" class="col-sm-2 control-label">Name</label>
+					<div class="col-sm-10">
+						<input ng-model="lesson.name" class="form-control" id="name" placeholder="Name">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="year" class="col-sm-2 control-label">Year</label>
+					<div class="col-sm-10">
+						<input ng-model="lesson.year" class="form-control" id="year" placeholder="Year">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="classNo" class="col-sm-2 control-label">ClassNo</label>
+					<div class="col-sm-10">
+						<input ng-model="lesson.classNo" class="form-control" id="classNo" placeholder="ClassNo">
+					</div>
+				</div>
+			</form>
+			<div ng-repeat="ex in lesson.excercises"  class="panel panel-primary">
 				<div class="panel-heading">
 					<span>{{$index+1 + "."}}</span>
 					<div ng-show="actual.idx != $index" class="excerciseButtons">
-						<button class="btn btn-primary btn-xs" ng-click="editItem($index)"><span class="glyphicon glyphicon-edit"></span></button>
-						<button class="btn btn-primary btn-xs" ng-confirm-click="deleteItem($index)" confirm-title="{{'global.confirmTitle' | translate}}" confirm-body="{{'global.confirmDelete' | translate}}"><span class="glyphicon glyphicon-remove"></span></br></button>				
+						<button class="btn btn-warning btn-xs" ng-confirm-click="deleteItem($index)" confirm-title="{{'global.confirmTitle' | translate}}" confirm-body="{{'global.confirmDelete' | translate}}"><span class="glyphicon glyphicon-remove"></span></button>				
+						<button class="btn btn-success btn-xs" ng-click="editItem($index)"><span class="glyphicon glyphicon-edit"></span></button>
 					</div>
 				</div>
-				<div class="panel-body" id="{{'excercise_' + $index}}" math-test>
-					<div ng-bind-html="ex.html"></div>
+				<div class="panel-body" id="{{'excercise_' + $index}}">
+					<div ng-bind-html="ex.html" math-test></div>
+				</div>
+				<hr/>
+				<div class="panel-body">
+					<div ng-show="actual.idx != $index" class="excerciseButtons">
+						<button class="btn btn-warning btn-xs" ng-click="deleteLastResult($index)" ng-show="ex.results.length > 1"><span class="glyphicon glyphicon-minus"></span></button>				
+						<button class="btn btn-success btn-xs" ng-click="addResult($index)"><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+					<span class="resultInput" ng-repeat="rs in ex.results">
+						<span style="position:relative;top:-2px;">{{"(" + getChar($index) + ") "}}</span>
+						<input type="checkbox" ng-model="rs.right" ></input>
+						<br/>						
+						<input ng-model="rs.val" class="form-control w150"></input>
+					</span>
 				</div>
 			</div>
 		</div>
 		<div ng-show="!actckeditor">
-			<button ng-click="addNew()" class="btn btn-primary" translate="button.new">New</button>
+			<div class="pull-right">
+				<button ng-click="goToView()" class="btn btn-primary">View</button>		
+				<button ng-click="getJson()" class="btn btn-primary">Download</a>		
+			</div>
+			<button ng-click="addNew()" class="btn btn-primary">New</button>
 		</div>
 		<div id="editorButtons" ng-show="actckeditor">
 			<button ng-click="save()" class="btn btn-primary" translate="button.save">Save</button>
-			<button ng-click="cancel()" class="btn btn-primary" translate="button.cancel">Cancel</button>
+			<button ng-click="cancel()" class="btn btn-warning" translate="button.cancel">Cancel</button>
 		</div>
 	</div>
 </div>

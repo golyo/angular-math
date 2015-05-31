@@ -52,6 +52,10 @@ mathApp
 				url: '',
 				templateUrl: 'views/maintainance.html'			
 			})
+			.state('maintain.view', {
+				url: '/view',
+				templateUrl: 'views/maintainance_view.html'			
+			})
 			;
 		$urlRouterProvider
 			.otherwise('/home');

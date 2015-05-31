@@ -9,6 +9,15 @@ div.editable {
   margin-top: 10px;
 }
 
+.w150 {
+	width: 150px;
+}
+
+.resultInput {
+	display: inline-block;
+	margin: 0px 5px;
+}
+
 .excerciseButtons {
 	float: right;
 }
